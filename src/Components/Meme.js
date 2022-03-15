@@ -5,12 +5,24 @@ import memesData from "../memesData"
 
 export default function Meme(){
 
-    const [memeImage, setMemeImage] = React.useState("") // deconstructed state [name, set funcition] useState(initial value)
+    const [memeImage, setMemeImage] = React.useState({
+        topText: "",
+        bottomText: "",
+        randomImage: "https://i.imgflip.com/1otk96.jpg"
+    }) // deconstructed state [name, set funcition] useState(initial value)
+    
+    const [allMemeImages, setAllMemeImages] = React.useState(memesData)
     
     function getMemeImage(){
-        const memesArray = memesData.data.memes // store just the memes from the data in a variable
+        const memesArray = allMemeImages.data.memes // store just the memes from the data in a variable
         const randomNumber = Math.floor(Math.random() * memesArray.length) //aquire a random number from the amount of memes we have 
-        setMemeImage(memesArray[randomNumber].url) // use the state set function to set the image using the meme chosen at random from above
+        const url = memesArray[randomNumber].url //save the random meme url to a variable for ease in the setMemeImage
+        setMemeImage(prevMeme => ({
+            ...prevMeme,
+            randomImage:url
+        }) ) // set the memeImage by getting the previous meme and changing it with the new meme from the URL variable
+    
+    
     }
 
     return(
@@ -20,6 +32,7 @@ export default function Meme(){
                     className="form--input"
                     type="text"
                     placeholder="Top text"
+                    topText={memeImage.topText}
                 />
                 <input type="text" 
                     className="form--input"
@@ -33,7 +46,7 @@ export default function Meme(){
                     Get meme image
                 </button>
             </div>
-            <img className="meme--image" src={memeImage}/> 
+            <img className="meme--image" src={memeImage.randomImage}/> 
             {/*when the button is clicked this image state will be updated with the new meme found from 
               getMemeImage() and the state will be update to a new meme everytime the button is clicked */}
         </main>
