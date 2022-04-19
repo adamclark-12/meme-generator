@@ -11,7 +11,7 @@ export default function Meme(){
         randomImage: "https://i.imgflip.com/1otk96.jpg"
     }) // deconstructed state [name, set funcition] useState(initial value)
     
-    const [allMemeImages, setAllMemeImages] = React.useState(memesData)
+    const [allMemeImages, setAllMemeImages] = React.useState(memesData) //state for the images
     
     function getMemeImage(){
         const memesArray = allMemeImages.data.memes // store just the memes from the data in a variable
@@ -32,9 +32,9 @@ export default function Meme(){
                     className="form--input"
                     type="text"
                     placeholder="Top text"
-                    topText={memeImage.topText}
+                    
                 />
-                <input type="text" 
+                <input 
                     className="form--input"
                     type="text"
                     placeholder="Bottom text"
@@ -46,9 +46,14 @@ export default function Meme(){
                     Get meme image
                 </button>
             </div>
+            
+            <div className="meme">
             <img className="meme--image" src={memeImage.randomImage}/> 
             {/*when the button is clicked this image state will be updated with the new meme found from 
               getMemeImage() and the state will be update to a new meme everytime the button is clicked */}
+              <h2 className="meme-text top">Yo</h2>
+              <h2 className="meme-text bottom">Testing</h2>
+              </div>
         </main>
     )
 }
