@@ -10,12 +10,24 @@ export default function Meme(){
     
     const [allMemes, setAllMemes] = React.useState([]) //state for the images
 
+    // React.useEffect(() => {
+    //     fetch("https://api.imgflip.com/get_memes")
+    //         .then(res => res.json())
+    //         .then(data => setAllMemes(data.data.memes))
+    // }, [])
+    
     React.useEffect(() => {
-        fetch("https://api.imgflip.com/get_memes")
-            .then(res => res.json())
-            .then(data => setAllMemes(data.data.memes))
-    }, [])
-
+        async function getMemes(){
+            const res = await fetch("https://api.imgflip.com/get_memes")
+            const data = await res.json()
+            setAllMemes(data.data.memes)
+        }
+        getMemes()
+    }, []) //As a async function inside of a use effect you need to define the function seperatly insideo of the callback
+            //function and then call it as well. 
+    
+    
+    
     
     function getMeme(){
         const randomNumber = Math.floor(Math.random() * allMemes.length) //aquire a random number from the amount of memes we have 
