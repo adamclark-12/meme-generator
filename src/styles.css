@@ -9,6 +9,8 @@ body {
 
 main {
     padding: 36px;
+    
+    
 }
 
 .header {
@@ -61,6 +63,9 @@ main {
 
 .meme {
     position: absolute;
+    margin-left: 30%;
+
+    
 }
 
 .meme--image {
@@ -68,6 +73,8 @@ main {
     max-height: 500px;
     max-width: 600px;
     border-radius: 3px;
+    
+
 }
 
 .meme--text {
